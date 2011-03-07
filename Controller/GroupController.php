@@ -107,7 +107,7 @@ class GroupController extends ContainerAware
             $this->container->get('fos_user.group_manager')->updateGroup($group);
 
             $this->setFlash('fos_user_group_create', 'success');
-            return new RedirectResponse( $this->container->get('router')->generate('doctrine_user_group_show', array('groupname' => $group->getName())));
+            return new RedirectResponse( $this->container->get('router')->generate('fos_user_group_show', array('groupname' => $group->getName())));
         }
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:new.html.'.$this->getEngine(), array(
