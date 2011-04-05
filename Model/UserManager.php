@@ -117,14 +117,16 @@ abstract class UserManager implements UserManagerInterface, UserProviderInterfac
      *
      * It is strongly discouraged to call this method manually as it bypasses
      * all ACL checks.
+     * This method implements UserProviderInterface, is for internal usage only
+     * and expects a usernameCanonical as argument.
      *
      * @RunAs(roles="ROLE_SUPERADMIN")
      * @param string $username
      * @return SecurityUserInterface
      */
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($usernameCanonical)
     {
-        $user = $this->findUserByUsername($username);
+        $user = $this->findUserByUsernameCanonical($usernameCanonical);
 
         if (!$user) {
             throw new UsernameNotFoundException(sprintf('No user with name "%s" was found.', $username));
